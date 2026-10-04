@@ -1,0 +1,18 @@
+name: Alerta DevOps
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notificar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Enviar notificación a ntfy
+        run: |
+          curl -d "Se ha realizado un push al repositorio ${GITHUB_REPOSITORY} en la rama main." \
+            -H "Title: GitHub Actions - ITLA" \
+            -H "Priority: default" \
+            https://ntfy.sh/devops-itla
